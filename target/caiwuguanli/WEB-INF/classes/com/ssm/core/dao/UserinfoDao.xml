@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.core.dao.UserinfoDao" >
+
+
+    <!-- 查询列表  -->
+    <select id="getUserinfoList" parameterType="Userinfo"
+            resultType="Userinfo">
+        SELECT *  FROM  Userinfo
+       <where>
+           <if test="id!=null and id!=''">
+               and id like  concat('%',#{id},'%')
+           </if> <if test="username!=null and username!=''">
+               and username like  concat('%',#{username},'%')
+           </if> <if test="password!=null and password!=''">
+               and password like  concat('%',#{password},'%')
+           </if>
+       </where>
+    </select>
+ 
+
+    <!-- 添加客户 -->
+    <insert id="add" parameterType="Userinfo">
+        insert into Userinfo(
+           id,username,password
+        )
+        values(#{id},#{username},#{password}
+              )
+    </insert>
+
+    <!-- 根据id获取信息 -->
+    <select id="getUserinfo" parameterType="Integer"
+            resultType="Userinfo">
+        select * from Userinfo where id = #{id}
+    </select>
+    <!-- 更新客户 -->
+    <update id="update" parameterType="Userinfo">
+        update Userinfo
+        <set>
+             <if test="id!=null">
+                id=#{id},
+            </if> <if test="username!=null">
+                username=#{username},
+            </if> <if test="password!=null">
+                password=#{password},
+            </if>
+
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- 删除客户 -->
+    <delete id="delete" parameterType="Integer">
+        delete from Userinfo where id=#{id}
+    </delete>
+</mapper>
+

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.core.dao.YonghuDao" >
+
+
+    <!-- 查询列表  -->
+    <select id="getYonghuList" parameterType="Yonghu"
+            resultType="Yonghu">
+        SELECT *  FROM  Yonghu
+       <where>
+           <if test="id!=null and id!=''">
+               and id like  concat('%',#{id},'%')
+           </if> <if test="username!=null and username!=''">
+               and username like  concat('%',#{username},'%')
+           </if> <if test="password!=null and password!=''">
+               and password like  concat('%',#{password},'%')
+           </if> <if test="name!=null and name!=''">
+               and name like  concat('%',#{name},'%')
+           </if> <if test="sex!=null and sex!=''">
+               and sex like  concat('%',#{sex},'%')
+           </if> <if test="age!=null and age!=''">
+               and age like  concat('%',#{age},'%')
+           </if> <if test="jibengongzi!=null and jibengongzi!=''">
+               and jibengongzi like  concat('%',#{jibengongzi},'%')
+           </if> <if test="gongjijingerenjine!=null and gongjijingerenjine!=''">
+               and gongjijingerenjine like  concat('%',#{gongjijingerenjine},'%')
+           </if> <if test="gongjijinzongjine!=null and gongjijinzongjine!=''">
+               and gongjijinzongjine like  concat('%',#{gongjijinzongjine},'%')
+           </if>
+       </where>
+    </select>
+ 
+
+    <!-- 添加客户 -->
+    <insert id="add" parameterType="Yonghu">
+        insert into Yonghu(
+           id,username,password,name,sex,age,jibengongzi,gongjijingerenjine,gongjijinzongjine
+        )
+        values(#{id},#{username},#{password},#{name},#{sex},#{age},#{jibengongzi},#{gongjijingerenjine},#{gongjijinzongjine}
+              )
+    </insert>
+
+    <!-- 根据id获取信息 -->
+    <select id="getYonghu" parameterType="Integer"
+            resultType="Yonghu">
+        select * from Yonghu where id = #{id}
+    </select>
+    <!-- 更新客户 -->
+    <update id="update" parameterType="Yonghu">
+        update Yonghu
+        <set>
+             <if test="id!=null">
+                id=#{id},
+            </if> <if test="username!=null">
+                username=#{username},
+            </if> <if test="password!=null">
+                password=#{password},
+            </if> <if test="name!=null">
+                name=#{name},
+            </if> <if test="sex!=null">
+                sex=#{sex},
+            </if> <if test="age!=null">
+                age=#{age},
+            </if> <if test="jibengongzi!=null">
+                jibengongzi=#{jibengongzi},
+            </if> <if test="gongjijingerenjine!=null">
+                gongjijingerenjine=#{gongjijingerenjine},
+            </if> <if test="gongjijinzongjine!=null">
+                gongjijinzongjine=#{gongjijinzongjine},
+            </if>
+
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- 删除客户 -->
+    <delete id="delete" parameterType="Integer">
+        delete from Yonghu where id=#{id}
+    </delete>
+</mapper>
+

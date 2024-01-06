@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.core.dao.GongjijintiqujiluDao" >
+
+
+    <!-- 查询列表  -->
+    <select id="getGongjijintiqujiluList" parameterType="Gongjijintiqujilu"
+            resultType="Gongjijintiqujilu">
+        SELECT *  FROM  Gongjijintiqujilu
+       <where>
+           <if test="id!=null and id!=''">
+               and id like  concat('%',#{id},'%')
+           </if> <if test="yonghuid!=null and yonghuid!=''">
+               and yonghuid like  concat('%',#{yonghuid},'%')
+           </if> <if test="tiqujine!=null and tiqujine!=''">
+               and tiqujine like  concat('%',#{tiqujine},'%')
+           </if> <if test="tiqushijian!=null and tiqushijian!=''">
+               and tiqushijian like  concat('%',#{tiqushijian},'%')
+           </if>
+       </where>
+    </select>
+ 
+
+    <!-- 添加客户 -->
+    <insert id="add" parameterType="Gongjijintiqujilu">
+        insert into Gongjijintiqujilu(
+           id,yonghuid,tiqujine,tiqushijian
+        )
+        values(#{id},#{yonghuid},#{tiqujine},#{tiqushijian}
+              )
+    </insert>
+
+    <!-- 根据id获取信息 -->
+    <select id="getGongjijintiqujilu" parameterType="Integer"
+            resultType="Gongjijintiqujilu">
+        select * from Gongjijintiqujilu where id = #{id}
+    </select>
+    <!-- 更新客户 -->
+    <update id="update" parameterType="Gongjijintiqujilu">
+        update Gongjijintiqujilu
+        <set>
+             <if test="id!=null">
+                id=#{id},
+            </if> <if test="yonghuid!=null">
+                yonghuid=#{yonghuid},
+            </if> <if test="tiqujine!=null">
+                tiqujine=#{tiqujine},
+            </if> <if test="tiqushijian!=null">
+                tiqushijian=#{tiqushijian},
+            </if>
+
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- 删除客户 -->
+    <delete id="delete" parameterType="Integer">
+        delete from Gongjijintiqujilu where id=#{id}
+    </delete>
+</mapper>
+

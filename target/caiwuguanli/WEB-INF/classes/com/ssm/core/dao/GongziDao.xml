@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.core.dao.GongziDao" >
+
+
+    <!-- 查询列表  -->
+    <select id="getGongziList" parameterType="Gongzi"
+            resultType="Gongzi">
+        SELECT *  FROM  Gongzi
+       <where>
+           <if test="id!=null and id!=''">
+               and id like  concat('%',#{id},'%')
+           </if> <if test="yuefen!=null and yuefen!=''">
+               and yuefen like  concat('%',#{yuefen},'%')
+           </if> <if test="gonghao!=null and gonghao!=''">
+               and gonghao like  concat('%',#{gonghao},'%')
+           </if> <if test="xingming!=null and xingming!=''">
+               and xingming like  concat('%',#{xingming},'%')
+           </if> <if test="jibengongzi!=null and jibengongzi!=''">
+               and jibengongzi like  concat('%',#{jibengongzi},'%')
+           </if> <if test="gongjijingerenjine!=null and gongjijingerenjine!=''">
+               and gongjijingerenjine like  concat('%',#{gongjijingerenjine},'%')
+           </if> <if test="gongjijinzongjine!=null and gongjijinzongjine!=''">
+               and gongjijinzongjine like  concat('%',#{gongjijinzongjine},'%')
+           </if> <if test="shifagongzi!=null and shifagongzi!=''">
+               and shifagongzi like  concat('%',#{shifagongzi},'%')
+           </if>
+       </where>
+    </select>
+ 
+
+    <!-- 添加客户 -->
+    <insert id="add" parameterType="Gongzi">
+        insert into Gongzi(
+           id,yuefen,gonghao,xingming,jibengongzi,gongjijingerenjine,gongjijinzongjine,shifagongzi
+        )
+        values(#{id},#{yuefen},#{gonghao},#{xingming},#{jibengongzi},#{gongjijingerenjine},#{gongjijinzongjine},#{shifagongzi}
+              )
+    </insert>
+
+    <!-- 根据id获取信息 -->
+    <select id="getGongzi" parameterType="Integer"
+            resultType="Gongzi">
+        select * from Gongzi where id = #{id}
+    </select>
+    <!-- 更新客户 -->
+    <update id="update" parameterType="Gongzi">
+        update Gongzi
+        <set>
+             <if test="id!=null">
+                id=#{id},
+            </if> <if test="yuefen!=null">
+                yuefen=#{yuefen},
+            </if> <if test="gonghao!=null">
+                gonghao=#{gonghao},
+            </if> <if test="xingming!=null">
+                xingming=#{xingming},
+            </if> <if test="jibengongzi!=null">
+                jibengongzi=#{jibengongzi},
+            </if> <if test="gongjijingerenjine!=null">
+                gongjijingerenjine=#{gongjijingerenjine},
+            </if> <if test="gongjijinzongjine!=null">
+                gongjijinzongjine=#{gongjijinzongjine},
+            </if> <if test="shifagongzi!=null">
+                shifagongzi=#{shifagongzi},
+            </if>
+
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- 删除客户 -->
+    <delete id="delete" parameterType="Integer">
+        delete from Gongzi where id=#{id}
+    </delete>
+</mapper>
+
